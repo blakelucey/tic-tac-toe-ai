@@ -171,8 +171,13 @@ npm run format
 
 ## AI Usage Disclosure
 
-AI tooling was used to accelerate scaffolding, explore implementation options, and help draft portions of the initial structure. All final architecture, code paths, tests, naming, and documentation were manually reviewed and refined before being kept in the repository.
+I used AI tools to accelerate development and explore implementation approaches, specifically for:
+
+- scaffolding a production-grade project structure
+- enforcing separation of concerns between domain logic, UI, and services
+- generating initial approaches for CPU strategies and UI refinement
 
 ## Prompts Used
 
-- Primary build prompt: [`prompts/prompt-1.md`](/Users/blakelucey/Desktop/Coding/Dev/tic-tac-toe-ai/prompts/prompt-1.md)
+- Architecture & Implementation prompt: [`prompts/prompt-1.md`](/Users/blakelucey/Desktop/Coding/Dev/tic-tac-toe-ai/prompts/prompt-1.md)
+- UI & Motion Enhancement prompt: [`prompts/prompt-2.md`] (/Users/blakelucey/Desktop/Coding/Dev/tic-tac-toe-ai/prompts/prompt-2.md)

@@ -23,6 +23,7 @@ export function WinningLineOverlay({
 }: WinningLineOverlayProps) {
   const progress = useSharedValue(winningLine ? 1 : 0);
   const inset = gap / 2;
+  const lineThickness = 6;
 
   const metrics = useMemo(() => {
     if (!winningLine) {
@@ -49,8 +50,8 @@ export function WinningLineOverlay({
     return {
       angle,
       length,
-      startX: start.x,
-      startY: start.y - 3,
+      left: (start.x + end.x) / 2 - length / 2,
+      top: (start.y + end.y) / 2 - lineThickness / 2,
     };
   }, [cellSize, gap, inset, winningLine]);
 
@@ -63,11 +64,9 @@ export function WinningLineOverlay({
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: progress.value,
-    width: (metrics?.length ?? 0) * progress.value,
     transform: [
-      { translateX: metrics?.startX ?? 0 },
-      { translateY: metrics?.startY ?? 0 },
       { rotate: `${metrics?.angle ?? 0}deg` },
+      { scaleX: progress.value },
     ],
   }));
 
@@ -76,16 +75,25 @@ export function WinningLineOverlay({
   }
 
   return (
-    <Animated.View pointerEvents="none" style={[styles.line, animatedStyle]} />
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        styles.line,
+        animatedStyle,
+        {
+          left: metrics.left,
+          top: metrics.top,
+          width: metrics.length,
+          height: lineThickness,
+        },
+      ]}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   line: {
     position: 'absolute',
-    left: 0,
-    top: 0,
-    height: 6,
     borderRadius: theme.radii.pill,
     backgroundColor: theme.colors.line,
     shadowColor: theme.colors.accent,

@@ -106,26 +106,33 @@ export function GameScreen() {
               <Text style={styles.boardEyebrow}>Live board</Text>
               <Text style={styles.boardTitle}>Head-to-head lane control</Text>
             </View>
-            <View style={styles.matchupRow}>
-              <View
-                style={[
-                  styles.matchupChip,
-                  currentPlayer === 'X' && styles.matchupChipActive,
-                ]}
-              >
-                <Text style={styles.matchupLabel}>You</Text>
-                <Text style={styles.matchupValue}>X</Text>
+            <View style={styles.boardHeaderControls}>
+              <View style={styles.matchupRow}>
+                <View
+                  style={[
+                    styles.matchupChip,
+                    currentPlayer === 'X' && styles.matchupChipActive,
+                  ]}
+                >
+                  <Text style={styles.matchupLabel}>You</Text>
+                  <Text style={styles.matchupValue}>X</Text>
+                </View>
+                <View
+                  style={[
+                    styles.matchupChip,
+                    styles.cpuChip,
+                    currentPlayer === 'O' && styles.cpuChipActive,
+                  ]}
+                >
+                  <Text style={styles.matchupLabel}>CPU</Text>
+                  <Text style={[styles.matchupValue, styles.cpuValue]}>O</Text>
+                </View>
               </View>
-              <View
-                style={[
-                  styles.matchupChip,
-                  styles.cpuChip,
-                  currentPlayer === 'O' && styles.cpuChipActive,
-                ]}
-              >
-                <Text style={styles.matchupLabel}>CPU</Text>
-                <Text style={[styles.matchupValue, styles.cpuValue]}>O</Text>
-              </View>
+              <ResetButton
+                iconOnly
+                label={status === 'in_progress' ? 'New board' : 'Play again'}
+                onPress={() => resetGame()}
+              />
             </View>
           </View>
 
@@ -153,21 +160,6 @@ export function GameScreen() {
             <DifficultySelector
               difficulty={difficulty}
               onChange={setDifficulty}
-            />
-          </View>
-
-          <View style={styles.footer}>
-            <View style={styles.footerCopy}>
-              <Text style={styles.footerLabel}>Reset the round</Text>
-              <Text style={styles.footerText}>
-                {status === 'in_progress'
-                  ? 'Start a fresh board instantly with the current difficulty.'
-                  : 'Queue the next round and keep the session stats rolling.'}
-              </Text>
-            </View>
-            <ResetButton
-              label={status === 'in_progress' ? 'New board' : 'Play again'}
-              onPress={() => resetGame()}
             />
           </View>
         </Animated.View>
@@ -277,10 +269,16 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   boardHeaderRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     gap: theme.spacing.sm,
+  },
+  boardHeaderControls: {
+    alignItems: 'center',
+    flexDirection: 'row',
     flexWrap: 'wrap',
+    gap: theme.spacing.sm,
+    justifyContent: 'space-between',
+    width: '100%',
   },
   boardEyebrow: {
     ...textStyles.sectionLabel,
@@ -299,6 +297,7 @@ const styles = StyleSheet.create({
   },
   matchupRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: theme.spacing.xs,
   },
   matchupChip: {
@@ -357,20 +356,6 @@ const styles = StyleSheet.create({
     ...textStyles.sectionLabel,
   },
   sectionBody: {
-    ...textStyles.body,
-  },
-  footer: {
-    alignItems: 'stretch',
-    gap: theme.spacing.md,
-  },
-  footerCopy: {
-    flex: 1,
-    gap: theme.spacing.xs,
-  },
-  footerLabel: {
-    ...textStyles.sectionLabel,
-  },
-  footerText: {
     ...textStyles.body,
   },
 });
