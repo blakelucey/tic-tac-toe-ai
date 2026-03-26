@@ -43,8 +43,8 @@ export function SessionStats({ stats, currentRound }: SessionStatsProps) {
     >
       <View style={styles.headerRow}>
         <View>
-          <Text style={styles.eyebrow}>Session board</Text>
-          <Text style={styles.title}>Track the current run</Text>
+          <Text style={styles.eyebrow}>Score</Text>
+          <Text style={styles.title}>Session results</Text>
         </View>
         <View style={styles.roundBadge}>
           <Text style={styles.roundBadgeText}>Round {currentRound}</Text>

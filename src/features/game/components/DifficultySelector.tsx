@@ -17,7 +17,7 @@ const OPTIONS: ReadonlyArray<{
   {
     value: 'easy',
     label: 'Easy',
-    detail: 'Quick pick',
+    detail: 'Random',
   },
   {
     value: 'hard',

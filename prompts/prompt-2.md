@@ -1,6 +1,6 @@
 You are a principal-level React Native engineer and product-minded mobile UI architect.
 
-Upgrade this existing Expo + React Native + TypeScript take-home project into a more intriguing, polished, premium-feeling mobile UI for Cheddr, a sports gambling company.
+Upgrade this existing Expo + React Native + TypeScript take-home project into a more intriguing, polished, premium-feeling mobile UI.
 
 Important context:
 

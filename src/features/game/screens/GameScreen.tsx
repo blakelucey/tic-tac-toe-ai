@@ -71,19 +71,19 @@ export function GameScreen() {
           <View style={styles.heroMetaRow}>
             <View style={styles.brandBadge}>
               <View style={styles.brandDot} />
-              <Text style={styles.brandLabel}>Cheddr arcade</Text>
+              <Text style={styles.brandLabel}>Arcade</Text>
             </View>
             <View style={styles.readyBadge}>
               <Text style={styles.readyBadgeText}>
-                {isCpuThinking ? 'Live' : 'Ready'}
+                {isCpuThinking ? 'CPU' : 'Ready'}
               </Text>
             </View>
           </View>
 
           <Text style={styles.title}>Tic-Tac-Toe AI</Text>
           <Text style={styles.subtitle}>
-            A fast-turn CPU challenge styled like a premium sportsbook promo
-            surface: dark, crisp, intentional, and built to feel live.
+            Play tic-tac-toe against the computer. Choose a random opponent or
+            the minimax strategy and take turns on a 3x3 board.
           </Text>
         </Animated.View>
 
@@ -103,8 +103,8 @@ export function GameScreen() {
         >
           <View style={styles.boardHeaderRow}>
             <View>
-              <Text style={styles.boardEyebrow}>Live board</Text>
-              <Text style={styles.boardTitle}>Head-to-head lane control</Text>
+              <Text style={styles.boardEyebrow}>Game board</Text>
+              <Text style={styles.boardTitle}>Current game</Text>
             </View>
             <View style={styles.boardHeaderControls}>
               <View style={styles.matchupRow}>
@@ -152,10 +152,9 @@ export function GameScreen() {
           style={[styles.controlsCard, shadows.card]}
         >
           <View style={styles.section}>
-            <Text style={styles.sectionLabel}>Difficulty market</Text>
+            <Text style={styles.sectionLabel}>Difficulty</Text>
             <Text style={styles.sectionBody}>
-              Toggle between a quick random opponent and the deterministic
-              minimax engine.
+              Easy mode chooses a random open square. Hard mode uses minimax.
             </Text>
             <DifficultySelector
               difficulty={difficulty}

@@ -53,7 +53,7 @@ The updated visual system is intentionally inspired by a modern sportsbook produ
 - data-forward session tracking and live-status treatment
 - motion that feels fast and confident rather than playful or decorative
 
-The result is meant to feel like a promotional engagement surface that could plausibly exist inside a Cheddr mobile product without pretending to be a real wagering flow.
+The result is meant to feel like a promotional engagement surface that could plausibly exist inside a mobile product without pretending to be a real wagering flow.
 
 ## CPU Strategy
 
@@ -166,7 +166,7 @@ npm run format
 - Add a small E2E smoke test pass with Detox or Maestro for basic tap flow verification.
 - Persist difficulty selection and recent results locally.
 - Add haptic feedback tuned to move, win, and reset events.
-- Add a branded onboarding / explainer sheet if this were embedded in a larger Cheddr app surface.
+- Add a branded onboarding / explainer sheet if this were embedded in a larger app surface.
 - Expose a difficulty analytics surface only if this became a real shipped feature.
 
 ## AI Usage Disclosure

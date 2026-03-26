@@ -8,37 +8,37 @@ export const selectIsBoardDisabled = (state: GameState): boolean =>
 
 export const selectStatusHeadline = (state: GameState): string => {
   if (state.isCpuThinking) {
-    return 'Live engine evaluating';
+    return 'CPU turn';
   }
 
   switch (state.status) {
     case 'human_won':
-      return 'Round secured';
+      return 'You won';
     case 'cpu_won':
-      return 'CPU takes the board';
+      return 'CPU won';
     case 'draw':
-      return 'Board settled';
+      return 'Draw';
     default:
-      return state.currentPlayer === HUMAN_PLAYER ? 'Your move' : 'CPU on deck';
+      return state.currentPlayer === HUMAN_PLAYER ? 'Your turn' : 'CPU turn';
   }
 };
 
 export const selectStatusDetail = (state: GameState): string => {
   if (state.isCpuThinking) {
     return state.difficulty === 'hard'
-      ? 'Running the minimax solver for the strongest available line.'
-      : 'Selecting a valid square from the live board.';
+      ? 'The CPU is evaluating the best available move.'
+      : 'The CPU is choosing a random valid move.';
   }
 
   switch (state.status) {
     case 'human_won':
-      return 'You closed the winning lane first. Queue the next round when ready.';
+      return 'The highlighted line marks the winning three-in-a-row.';
     case 'cpu_won':
-      return 'The CPU found the clean finish. Reset or drop to easy for a lighter pace.';
+      return 'The highlighted line marks the CPU win.';
     case 'draw':
-      return 'No line was available for either side. Start another round to keep the session moving.';
+      return 'All squares are filled and neither side completed a line.';
     default:
-      return `You are ${HUMAN_PLAYER}. The CPU plays ${CPU_PLAYER}. Tap any open cell to make the next call.`;
+      return `You are ${HUMAN_PLAYER}. The CPU is ${CPU_PLAYER}. Tap any open square to make a move.`;
   }
 };
 

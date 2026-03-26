@@ -70,12 +70,12 @@ export function GameStatusBanner({
             ]}
           />
           <Text style={styles.metaLabel}>
-            {isCpuThinking ? 'Live system' : 'Round status'}
+            {isCpuThinking ? 'Game status' : 'Game status'}
           </Text>
         </View>
         <View style={styles.modeChip}>
           <Text style={styles.modeChipText}>
-            {difficulty === 'hard' ? 'Hard / Solver' : 'Easy / Quick Pick'}
+            {difficulty === 'hard' ? 'Hard' : 'Easy'}
           </Text>
         </View>
       </View>
