@@ -20,6 +20,7 @@ src/
   app/
     App.tsx
     providers.tsx
+    theme.ts
   features/
     components/
     hooks/
@@ -29,6 +30,7 @@ src/
     types/
   services/
     ai/
+      strategies/
   tests/
 ```
 
@@ -40,7 +42,7 @@ Design choices:
 - `useCpuTurn` centralizes the delayed CPU move flow instead of scattering timers or effects across UI components.
 - A small token-based theme file keeps colors, spacing, radii, and elevation consistent without introducing a full design-system abstraction.
 - Session stats are tracked in the store so the experience feels more product-minded without adding backend complexity.
-- `App.tsx` at the repo root is intentionally thin and delegates to [`src/app/App.tsx`](/Users/blakelucey/Desktop/Coding/Dev/tic-tac-toe-ai/src/app/App.tsx).
+- `App.tsx` at the repo root is intentionally thin and delegates to [`src/app/App.tsx`](./src/app/App.tsx).
 
 ## Design Direction
 
@@ -79,32 +81,6 @@ Reanimated was chosen because it is React Native-native, Expo-compatible, and le
 - I kept the theme layer intentionally small instead of building a generalized component library.
 - I did not add persistence, navigation, analytics, or backend calls because they would increase surface area without improving the core take-home evaluation.
 - Tests focus on domain correctness and CPU behavior rather than UI snapshots. That gives better signal for a game like this.
-
-## Run With Bun
-
-Prerequisites:
-
-- Node.js current LTS
-- Bun
-- Xcode / iOS Simulator if you want to launch the iOS app directly from the CLI
-
-Install and run:
-
-```bash
-bun install
-bun run start
-```
-
-Useful Bun commands:
-
-```bash
-bun run ios
-bun run android
-bun run test
-bun run lint
-bun run format
-bun run typecheck
-```
 
 ## Run With npm / npx
 
@@ -176,7 +152,11 @@ I used AI tools to accelerate development and explore implementation approaches,
 - enforcing separation of concerns between domain logic, UI, and services
 - generating initial approaches for CPU strategies and UI refinement
 
+All final architecture, implementation, and documentation decisions were manually reviewed and refined.
+
 ## Prompts Used
 
-- Architecture & Implementation prompt: [`prompts/prompt-1.md`](/Users/blakelucey/Desktop/Coding/Dev/tic-tac-toe-ai/prompts/prompt-1.md)
-- UI & Motion Enhancement prompt: [`prompts/prompt-2.md`] (/Users/blakelucey/Desktop/Coding/Dev/tic-tac-toe-ai/prompts/prompt-2.md)
+The source prompts used during development are included in this repository:
+
+- Architecture & implementation: [`prompts/prompt-1.md`](./prompts/prompt-1.md)
+- UI and motion refinement: [`prompts/prompt-2.md`](./prompts/prompt-2.md)
