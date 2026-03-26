@@ -7,6 +7,7 @@ import {
   getNextPlayer,
   resolveGameStatus,
 } from '../lib/gameLogic';
+import { createSessionStats, recordCompletedRound } from '../lib/sessionStats';
 import {
   CPU_PLAYER,
   DEFAULT_DIFFICULTY,
@@ -17,6 +18,7 @@ import type {
   Difficulty,
   GameStatus,
   Player,
+  SessionStats,
   WinningLine,
 } from '../types/gameTypes';
 
@@ -28,6 +30,7 @@ type GameStateShape = {
   status: GameStatus;
   difficulty: Difficulty;
   isCpuThinking: boolean;
+  sessionStats: SessionStats;
 };
 
 export type GameState = GameStateShape & {
@@ -38,7 +41,10 @@ export type GameState = GameStateShape & {
   executeCpuMove: () => void;
 };
 
-function createGameState(difficulty: Difficulty): GameStateShape {
+function createGameState(
+  difficulty: Difficulty,
+  sessionStats: SessionStats = createSessionStats(),
+): GameStateShape {
   return {
     board: createEmptyBoard(),
     currentPlayer: HUMAN_PLAYER,
@@ -47,16 +53,17 @@ function createGameState(difficulty: Difficulty): GameStateShape {
     status: 'in_progress',
     difficulty,
     isCpuThinking: false,
+    sessionStats,
   };
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
   ...createGameState(DEFAULT_DIFFICULTY),
   resetGame: (difficulty) => {
-    set(createGameState(difficulty ?? get().difficulty));
+    set(createGameState(difficulty ?? get().difficulty, get().sessionStats));
   },
   setDifficulty: (difficulty) => {
-    set(createGameState(difficulty));
+    set(createGameState(difficulty, get().sessionStats));
   },
   makeHumanMove: (index) => {
     const state = get();
@@ -72,6 +79,10 @@ export const useGameStore = create<GameState>((set, get) => ({
     try {
       const board = applyMove(state.board, index, HUMAN_PLAYER);
       const snapshot = resolveGameStatus(board, HUMAN_PLAYER, CPU_PLAYER);
+      const sessionStats =
+        snapshot.status === 'in_progress'
+          ? state.sessionStats
+          : recordCompletedRound(state.sessionStats, snapshot.status);
 
       set({
         board,
@@ -82,6 +93,7 @@ export const useGameStore = create<GameState>((set, get) => ({
         winner: snapshot.winner,
         winningLine: snapshot.winningLine,
         status: snapshot.status,
+        sessionStats,
       });
 
       return true;
@@ -118,12 +130,17 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     if (move === null) {
       const snapshot = resolveGameStatus(state.board, HUMAN_PLAYER, CPU_PLAYER);
+      const sessionStats =
+        snapshot.status === 'in_progress'
+          ? state.sessionStats
+          : recordCompletedRound(state.sessionStats, snapshot.status);
 
       set({
         winner: snapshot.winner,
         winningLine: snapshot.winningLine,
         status: snapshot.status,
         isCpuThinking: false,
+        sessionStats,
       });
 
       return;
@@ -131,6 +148,10 @@ export const useGameStore = create<GameState>((set, get) => ({
 
     const board = applyMove(state.board, move, CPU_PLAYER);
     const snapshot = resolveGameStatus(board, HUMAN_PLAYER, CPU_PLAYER);
+    const sessionStats =
+      snapshot.status === 'in_progress'
+        ? state.sessionStats
+        : recordCompletedRound(state.sessionStats, snapshot.status);
 
     set({
       board,
@@ -142,6 +163,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       winningLine: snapshot.winningLine,
       status: snapshot.status,
       isCpuThinking: false,
+      sessionStats,
     });
   },
 }));

@@ -9,7 +9,7 @@ Single-player tic-tac-toe built with Expo, React Native, and TypeScript. The goa
 - Two CPU strategies are supported:
   - `easy`: random valid move
   - `hard`: deterministic minimax
-- The UI highlights the winning line, disables invalid interaction, and adds a short CPU thinking delay so the turn flow feels intentional.
+- The UI is intentionally styled like a premium sportsbook-adjacent mini-game: dark surfaces, strong status hierarchy, session stats, animated emphasis states, and fast feedback that keeps the board feeling live.
 
 ## Why This Architecture
 
@@ -39,7 +39,21 @@ Design choices:
 - `src/services/ai` owns CPU strategy selection so UI and store code do not know strategy internals.
 - Zustand is used for a single focused store because the app state is small but still benefits from explicit actions and selector-based reads.
 - `useCpuTurn` centralizes the delayed CPU move flow instead of scattering timers or effects across UI components.
+- A small token-based theme file keeps colors, spacing, radii, and elevation consistent without introducing a full design-system abstraction.
+- Session stats are tracked in the store so the experience feels more product-minded without adding backend complexity.
 - `App.tsx` at the repo root is intentionally thin and delegates to [`src/app/App.tsx`](/Users/blakelucey/Desktop/Coding/Dev/tic-tac-toe-ai/src/app/App.tsx).
+
+## Design Direction
+
+The updated visual system is intentionally inspired by a modern sportsbook product:
+
+- dark background with raised surfaces and controlled accent color
+- crisp text hierarchy with uppercase metadata labels
+- board-first composition with stronger depth and match-state emphasis
+- data-forward session tracking and live-status treatment
+- motion that feels fast and confident rather than playful or decorative
+
+The result is meant to feel like a promotional engagement surface that could plausibly exist inside a Cheddr mobile product without pretending to be a real wagering flow.
 
 ## CPU Strategy
 
@@ -47,10 +61,24 @@ Design choices:
 
 `hard` uses minimax with deterministic move ordering. Because tic-tac-toe is a solved game, minimax is a good fit here: it is easy to verify, easy to test, and guarantees optimal play without adding unnecessary complexity.
 
+## Motion Approach
+
+The app uses `react-native-reanimated` for contained, high-value interaction polish:
+
+- cell press scale feedback
+- animated difficulty selector pill
+- status banner transitions and CPU activity pulse
+- winning line reveal
+- entrance motion for the primary cards
+
+Reanimated was chosen because it is React Native-native, Expo-compatible, and lets animation stay close to the component that owns the interaction. That keeps the code reviewable while still improving perceived quality substantially.
+
 ## Tradeoffs
 
 - I kept state in a single store rather than splitting it across reducers or contexts because the app is small and the current approach is easier to trace.
-- I did not add persistence, navigation, analytics, or animation libraries because they would increase surface area without improving the core take-home evaluation.
+- I added Reanimated because it materially improves the interaction quality, but kept the motion system scoped and avoided turning the take-home into a flashy prototype.
+- I kept the theme layer intentionally small instead of building a generalized component library.
+- I did not add persistence, navigation, analytics, or backend calls because they would increase surface area without improving the core take-home evaluation.
 - Tests focus on domain correctness and CPU behavior rather than UI snapshots. That gives better signal for a game like this.
 
 ## Run With Bun
@@ -117,6 +145,7 @@ The test suite covers the domain and CPU logic:
 - available move calculation
 - minimax choosing winning and blocking moves
 - CPU strategies returning valid indexes
+- session stat aggregation for completed rounds
 
 Run tests with:
 
@@ -136,7 +165,8 @@ npm run format
 
 - Add a small E2E smoke test pass with Detox or Maestro for basic tap flow verification.
 - Persist difficulty selection and recent results locally.
-- Add subtle move / win animations now that the core architecture is stable.
+- Add haptic feedback tuned to move, win, and reset events.
+- Add a branded onboarding / explainer sheet if this were embedded in a larger Cheddr app surface.
 - Expose a difficulty analytics surface only if this became a real shipped feature.
 
 ## AI Usage Disclosure

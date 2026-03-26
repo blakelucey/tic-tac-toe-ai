@@ -20,6 +20,13 @@ export type GameStatus = 'in_progress' | 'human_won' | 'cpu_won' | 'draw';
 
 export type WinningLine = readonly [number, number, number];
 
+export type SessionStats = {
+  humanWins: number;
+  cpuWins: number;
+  draws: number;
+  rounds: number;
+};
+
 export type CpuStrategy = (input: {
   board: Board;
   cpuPlayer: Player;

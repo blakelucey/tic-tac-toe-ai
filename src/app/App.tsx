@@ -6,7 +6,7 @@ import { GameScreen } from '../features/game/screens/GameScreen';
 export default function App() {
   return (
     <AppProviders>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <GameScreen />
     </AppProviders>
   );

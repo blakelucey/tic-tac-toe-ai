@@ -1,6 +1,12 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Animated, {
+  FadeInDown,
+  LinearTransition,
+} from 'react-native-reanimated';
 
+import { theme } from '../../../app/theme';
 import { GameCell } from './GameCell';
+import { WinningLineOverlay } from './WinningLineOverlay';
 import type { Board, WinningLine } from '../types/gameTypes';
 
 const GRID_GAP = 12;
@@ -20,10 +26,20 @@ export function GameBoard({
   size,
   onCellPress,
 }: GameBoardProps) {
-  const cellSize = (size - GRID_GAP * 2) / 3;
+  const cellSize = (size - GRID_GAP * 2 - GRID_GAP) / 3;
 
   return (
-    <View style={[styles.board, { width: size }]}>
+    <Animated.View
+      entering={FadeInDown.duration(360)}
+      layout={LinearTransition.springify().damping(20).stiffness(180)}
+      style={[
+        styles.board,
+        {
+          width: size,
+          height: size,
+        },
+      ]}
+    >
       {board.map((value, index) => (
         <GameCell
           key={index}
@@ -34,14 +50,25 @@ export function GameBoard({
           value={value}
         />
       ))}
-    </View>
+      <WinningLineOverlay
+        cellSize={cellSize}
+        gap={GRID_GAP}
+        winningLine={winningLine}
+      />
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   board: {
+    position: 'relative',
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: GRID_GAP,
+    padding: GRID_GAP / 2,
+    borderRadius: theme.radii.lg,
+    backgroundColor: theme.colors.surfaceMuted,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
   },
 });
