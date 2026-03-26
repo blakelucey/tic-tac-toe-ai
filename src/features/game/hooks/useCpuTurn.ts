@@ -1,35 +1,30 @@
-import { useEffect, useEffectEvent } from 'react';
+import { useEffect } from 'react';
 
 import { CPU_PLAYER, CPU_THINKING_DELAY_MS } from '../lib/gameConfig';
 import { useGameStore } from '../store/gameStore';
 
 export function useCpuTurn() {
-  const shouldCpuPlay = useGameStore(
-    (state) =>
-      state.currentPlayer === CPU_PLAYER &&
-      state.status === 'in_progress' &&
-      !state.isCpuThinking,
-  );
+  const currentPlayer = useGameStore((state) => state.currentPlayer);
+  const status = useGameStore((state) => state.status);
   const beginCpuTurn = useGameStore((state) => state.beginCpuTurn);
   const executeCpuMove = useGameStore((state) => state.executeCpuMove);
 
-  const runCpuMove = useEffectEvent(() => {
-    executeCpuMove();
-  });
-
   useEffect(() => {
-    if (!shouldCpuPlay) {
+    const shouldScheduleCpuTurn =
+      currentPlayer === CPU_PLAYER && status === 'in_progress';
+
+    if (!shouldScheduleCpuTurn) {
       return undefined;
     }
 
     beginCpuTurn();
 
     const timeoutId = setTimeout(() => {
-      runCpuMove();
+      executeCpuMove();
     }, CPU_THINKING_DELAY_MS);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [beginCpuTurn, shouldCpuPlay]);
+  }, [beginCpuTurn, currentPlayer, executeCpuMove, status]);
 }
