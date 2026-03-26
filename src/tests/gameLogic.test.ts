@@ -7,8 +7,8 @@ import {
   getWinningLine,
   isDraw,
   resolveGameStatus,
-} from '../features/game/lib/gameLogic';
-import type { Board } from '../features/game/types/gameTypes';
+} from '../features/lib/gameLogic';
+import type { Board } from '../features/types/gameTypes';
 
 function board(values: Board): Board {
   return values;

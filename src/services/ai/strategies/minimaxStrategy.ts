@@ -3,12 +3,12 @@ import {
   calculateWinner,
   getAvailableMoves,
   isDraw,
-} from '../../../features/game/lib/gameLogic';
+} from '../../../features/lib/gameLogic';
 import type {
   Board,
   CpuStrategy,
   Player,
-} from '../../../features/game/types/gameTypes';
+} from '../../../features/types/gameTypes';
 
 const MOVE_PRIORITY = [4, 0, 2, 6, 8, 1, 3, 5, 7];
 

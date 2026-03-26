@@ -6,7 +6,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { shadows, textStyles, theme } from '../../../app/theme';
+import { shadows, textStyles, theme } from '../../app/theme';
 import type { Difficulty } from '../types/gameTypes';
 
 const OPTIONS: ReadonlyArray<{

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
-import { shadows, textStyles, theme } from '../../../app/theme';
+import { shadows, textStyles, theme } from '../../app/theme';
 import { DifficultySelector } from '../components/DifficultySelector';
 import { GameBoard } from '../components/GameBoard';
 import { GameStatusBanner } from '../components/GameStatusBanner';

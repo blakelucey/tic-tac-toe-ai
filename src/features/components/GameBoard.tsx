@@ -4,7 +4,7 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 
-import { theme } from '../../../app/theme';
+import { theme } from '../../app/theme';
 import { GameCell } from './GameCell';
 import { WinningLineOverlay } from './WinningLineOverlay';
 import type { Board, WinningLine } from '../types/gameTypes';

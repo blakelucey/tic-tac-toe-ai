@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { shadows, textStyles, theme } from '../../../app/theme';
+import { shadows, textStyles, theme } from '../../app/theme';
 import type { Difficulty } from '../types/gameTypes';
 
 type GameStatusBannerProps = {

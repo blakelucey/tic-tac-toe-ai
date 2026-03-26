@@ -1,7 +1,7 @@
 import { chooseCpuMove } from '../services/ai/cpuPlayer';
 import { minimaxStrategy } from '../services/ai/strategies/minimaxStrategy';
 import { createRandomStrategy } from '../services/ai/strategies/randomStrategy';
-import type { Board } from '../features/game/types/gameTypes';
+import type { Board } from '../features/types/gameTypes';
 
 function board(values: Board): Board {
   return values;

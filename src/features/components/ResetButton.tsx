@@ -6,7 +6,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import { textStyles, theme } from '../../../app/theme';
+import { textStyles, theme } from '../../app/theme';
 
 type ResetButtonProps = {
   label: string;

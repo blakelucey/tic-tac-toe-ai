@@ -21,13 +21,12 @@ src/
     App.tsx
     providers.tsx
   features/
-    game/
-      components/
-      hooks/
-      lib/
-      screens/
-      store/
-      types/
+    components/
+    hooks/
+    lib/
+    screens/
+    store/
+    types/
   services/
     ai/
   tests/
@@ -35,7 +34,7 @@ src/
 
 Design choices:
 
-- `src/features/game/lib/gameLogic.ts` contains pure game rules and board operations.
+- `src/features/lib/gameLogic.ts` contains pure game rules and board operations.
 - `src/services/ai` owns CPU strategy selection so UI and store code do not know strategy internals.
 - Zustand is used for a single focused store because the app state is small but still benefits from explicit actions and selector-based reads.
 - `useCpuTurn` centralizes the delayed CPU move flow instead of scattering timers or effects across UI components.

@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { shadows, theme } from '../../../app/theme';
+import { shadows, theme } from '../../app/theme';
 import { GameMark } from './GameMark';
 import type { CellValue } from '../types/gameTypes';
 
