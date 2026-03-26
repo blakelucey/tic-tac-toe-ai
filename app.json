@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "tic-tac-toe-ai",
+    "name": "Tic-Tac-Toe AI",
     "slug": "tic-tac-toe-ai",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
