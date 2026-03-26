@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
-import { shadows, textStyles, theme } from '../../../app/theme';
+import { shadows, textStyles, theme } from '../../app/theme';
 import type { SessionStats as SessionStatsShape } from '../types/gameTypes';
 
 type SessionStatsProps = {

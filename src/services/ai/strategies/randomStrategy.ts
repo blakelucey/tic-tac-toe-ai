@@ -1,5 +1,5 @@
-import { getAvailableMoves } from '../../../features/game/lib/gameLogic';
-import type { CpuStrategy } from '../../../features/game/types/gameTypes';
+import { getAvailableMoves } from '../../../features/lib/gameLogic';
+import type { CpuStrategy } from '../../../features/types/gameTypes';
 
 export function createRandomStrategy(random: () => number): CpuStrategy {
   return ({ board }) => {

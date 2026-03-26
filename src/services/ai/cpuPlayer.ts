@@ -5,7 +5,7 @@ import type {
   CpuStrategy,
   Difficulty,
   Player,
-} from '../../features/game/types/gameTypes';
+} from '../../features/types/gameTypes';
 
 const STRATEGIES: Record<Difficulty, CpuStrategy> = {
   easy: randomStrategy,

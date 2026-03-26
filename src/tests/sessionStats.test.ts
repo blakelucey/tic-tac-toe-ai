@@ -1,7 +1,7 @@
 import {
   createSessionStats,
   recordCompletedRound,
-} from '../features/game/lib/sessionStats';
+} from '../features/lib/sessionStats';
 
 describe('sessionStats', () => {
   it('creates an empty session tracker', () => {

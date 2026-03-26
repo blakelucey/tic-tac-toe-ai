@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { chooseCpuMove } from '../../../services/ai/cpuPlayer';
+import { chooseCpuMove } from '../../services/ai/cpuPlayer';
 import {
   applyMove,
   createEmptyBoard,
