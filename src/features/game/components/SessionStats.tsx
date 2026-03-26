@@ -82,17 +82,22 @@ export function SessionStats({ stats, currentRound }: SessionStatsProps) {
 
 const styles = StyleSheet.create({
   container: {
+    alignSelf: 'center',
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radii.lg,
     borderWidth: 1,
     borderColor: theme.colors.border,
     gap: theme.spacing.md,
+    maxWidth: 480,
     padding: theme.spacing.lg,
+    width: '100%',
   },
   headerRow: {
     alignItems: 'center',
     flexDirection: 'row',
+    gap: theme.spacing.sm,
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   eyebrow: {
     ...textStyles.sectionLabel,
@@ -118,6 +123,7 @@ const styles = StyleSheet.create({
   },
   statsRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: theme.spacing.sm,
   },
   statCard: {
@@ -126,6 +132,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.border,
     flex: 1,
+    minWidth: 96,
     gap: theme.spacing.xs,
     padding: theme.spacing.sm,
   },

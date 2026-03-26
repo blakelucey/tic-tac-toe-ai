@@ -33,6 +33,7 @@ export function ResetButton({ label, onPress }: ResetButtonProps) {
       onPress={onPress}
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
+      style={styles.pressable}
     >
       <Animated.View style={[styles.button, animatedStyle]}>
         <View style={styles.buttonAccent} />
@@ -44,6 +45,9 @@ export function ResetButton({ label, onPress }: ResetButtonProps) {
 }
 
 const styles = StyleSheet.create({
+  pressable: {
+    width: '100%',
+  },
   button: {
     alignItems: 'flex-start',
     backgroundColor: theme.colors.accent,
@@ -51,10 +55,10 @@ const styles = StyleSheet.create({
     gap: theme.spacing.xxs,
     justifyContent: 'center',
     minHeight: 72,
-    minWidth: 148,
     overflow: 'hidden',
     paddingHorizontal: theme.spacing.md,
     paddingVertical: theme.spacing.sm,
+    width: '100%',
   },
   buttonAccent: {
     backgroundColor: 'rgba(255, 255, 255, 0.18)',

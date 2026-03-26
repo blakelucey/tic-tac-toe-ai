@@ -23,6 +23,11 @@ import {
 } from '../store/gameSelectors';
 import { useGameStore } from '../store/gameStore';
 
+const CONTENT_MAX_WIDTH = 480;
+const SCREEN_HORIZONTAL_PADDING = theme.spacing.md;
+const BOARD_CARD_PADDING = theme.spacing.md;
+const BOARD_FRAME_PADDING = theme.spacing.xs;
+
 export function GameScreen() {
   useCpuTurn();
 
@@ -42,7 +47,13 @@ export function GameScreen() {
   const statusDetail = useGameStore(selectStatusDetail);
   const statusTone = useGameStore(selectStatusTone);
 
-  const boardSize = Math.min(width - theme.spacing.lg * 2, 348);
+  const boardSize = Math.min(
+    width -
+      SCREEN_HORIZONTAL_PADDING * 2 -
+      BOARD_CARD_PADDING * 2 -
+      BOARD_FRAME_PADDING * 2,
+    348,
+  );
   const currentRound = sessionStats.rounds + (status === 'in_progress' ? 1 : 0);
 
   return (
@@ -195,19 +206,22 @@ const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
     gap: theme.spacing.lg,
-    paddingHorizontal: theme.spacing.md,
+    paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
     paddingBottom: theme.spacing.xxl,
     paddingTop: theme.spacing.sm,
   },
   hero: {
+    alignSelf: 'center',
     backgroundColor: theme.colors.backgroundRaised,
     borderRadius: theme.radii.xl,
     borderWidth: 1,
     borderColor: theme.colors.border,
     gap: theme.spacing.sm,
+    maxWidth: CONTENT_MAX_WIDTH,
     overflow: 'hidden',
     paddingHorizontal: theme.spacing.lg,
     paddingVertical: theme.spacing.lg,
+    width: '100%',
   },
   heroMetaRow: {
     alignItems: 'center',
@@ -252,17 +266,21 @@ const styles = StyleSheet.create({
     ...textStyles.body,
   },
   boardCard: {
+    alignSelf: 'center',
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radii.xl,
     borderWidth: 1,
     borderColor: theme.colors.border,
     gap: theme.spacing.md,
-    padding: theme.spacing.lg,
+    maxWidth: CONTENT_MAX_WIDTH,
+    padding: BOARD_CARD_PADDING,
+    width: '100%',
   },
   boardHeaderRow: {
-    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    gap: theme.spacing.sm,
+    flexWrap: 'wrap',
   },
   boardEyebrow: {
     ...textStyles.sectionLabel,
@@ -277,7 +295,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radii.lg,
     borderWidth: 1,
     borderColor: theme.colors.border,
-    padding: theme.spacing.sm,
+    padding: BOARD_FRAME_PADDING,
   },
   matchupRow: {
     flexDirection: 'row',
@@ -322,12 +340,15 @@ const styles = StyleSheet.create({
     color: theme.colors.cpu,
   },
   controlsCard: {
+    alignSelf: 'center',
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radii.xl,
     borderWidth: 1,
     borderColor: theme.colors.border,
     gap: theme.spacing.lg,
+    maxWidth: CONTENT_MAX_WIDTH,
     padding: theme.spacing.lg,
+    width: '100%',
   },
   section: {
     gap: theme.spacing.sm,
@@ -339,10 +360,8 @@ const styles = StyleSheet.create({
     ...textStyles.body,
   },
   footer: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: 'stretch',
     gap: theme.spacing.md,
-    justifyContent: 'space-between',
   },
   footerCopy: {
     flex: 1,

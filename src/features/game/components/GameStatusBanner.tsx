@@ -87,13 +87,16 @@ export function GameStatusBanner({
 
 const styles = StyleSheet.create({
   container: {
+    alignSelf: 'center',
     backgroundColor: theme.colors.surface,
     borderColor: theme.colors.border,
     borderRadius: theme.radii.lg,
     borderWidth: 1,
     gap: theme.spacing.xs,
+    maxWidth: 480,
     paddingHorizontal: theme.spacing.lg,
     paddingVertical: theme.spacing.md,
+    width: '100%',
   },
   success: {
     backgroundColor: theme.colors.successSoft,
@@ -104,10 +107,11 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.danger,
   },
   topRow: {
-    alignItems: 'center',
     flexDirection: 'row',
+    gap: theme.spacing.sm,
     justifyContent: 'space-between',
     marginBottom: theme.spacing.xxs,
+    flexWrap: 'wrap',
   },
   statusMeta: {
     alignItems: 'center',

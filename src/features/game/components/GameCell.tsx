@@ -76,17 +76,19 @@ export function GameCell({
       onPress={onPress}
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
-      style={styles.pressable}
+      style={[
+        styles.pressable,
+        {
+          width: size,
+          height: size,
+        },
+      ]}
     >
       <Animated.View
         style={[
           styles.cell,
           shadows.floating,
           animatedCellStyle,
-          {
-            width: size,
-            height: size,
-          },
           value !== null && styles.filledCell,
           highlighted && styles.highlightedCell,
           disabled && value === null && styles.disabledCell,
@@ -111,6 +113,8 @@ const styles = StyleSheet.create({
     borderRadius: theme.radii.md,
   },
   cell: {
+    width: '100%',
+    height: '100%',
     alignItems: 'center',
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radii.md,

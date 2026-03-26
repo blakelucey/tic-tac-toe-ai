@@ -10,6 +10,11 @@ import { WinningLineOverlay } from './WinningLineOverlay';
 import type { Board, WinningLine } from '../types/gameTypes';
 
 const GRID_GAP = 12;
+const BOARD_ROWS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+] as const;
 
 type GameBoardProps = {
   board: Board;
@@ -40,15 +45,19 @@ export function GameBoard({
         },
       ]}
     >
-      {board.map((value, index) => (
-        <GameCell
-          key={index}
-          disabled={disabled || value !== null}
-          highlighted={winningLine?.includes(index) ?? false}
-          onPress={() => onCellPress(index)}
-          size={cellSize}
-          value={value}
-        />
+      {BOARD_ROWS.map((row) => (
+        <Animated.View key={row.join('-')} style={styles.row}>
+          {row.map((index) => (
+            <GameCell
+              key={index}
+              disabled={disabled || board[index] !== null}
+              highlighted={winningLine?.includes(index) ?? false}
+              onPress={() => onCellPress(index)}
+              size={cellSize}
+              value={board[index]}
+            />
+          ))}
+        </Animated.View>
       ))}
       <WinningLineOverlay
         cellSize={cellSize}
@@ -62,13 +71,15 @@ export function GameBoard({
 const styles = StyleSheet.create({
   board: {
     position: 'relative',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: GRID_GAP,
     padding: GRID_GAP / 2,
     borderRadius: theme.radii.lg,
     backgroundColor: theme.colors.surfaceMuted,
     borderWidth: 1,
     borderColor: theme.colors.border,
+  },
+  row: {
+    flexDirection: 'row',
+    gap: GRID_GAP,
   },
 });
